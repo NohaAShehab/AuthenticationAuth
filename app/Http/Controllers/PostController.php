@@ -6,6 +6,7 @@ use App\Http\Requests\PostValidationRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -114,10 +115,18 @@ class PostController extends Controller
 //        ],[
 //            "title.required"=>"Please provide descriptive title"
 //        ]);
-        $post->update($request->all());
+        $user=Auth::user();
+
+        if ($user->can('update', $post)) {
+            //user is authorized now
+            $post->update($request->all());
 //        return redirect(route("posts.index"));
-        // RETURN SHOW POST AFTER UPDATE
-        return redirect($post->path());
+            // RETURN SHOW POST AFTER UPDATE
+            return redirect($post->path());
+        }else{
+            return "not authorized";
+        }
+
     }
 
     /**
