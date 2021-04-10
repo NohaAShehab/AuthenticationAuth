@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,19 +19,10 @@ class PostController extends Controller
         //
         $posts=Post::all();
 //        dd($posts);
-        return $posts;
+        return PostResource::collection($posts);
+//        return $posts;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +49,10 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        return $post;
+//        return $post;
+//        $post=Post::findorFail($post);
+        return new PostResource($post);
+
     }
 
 
