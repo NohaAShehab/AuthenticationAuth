@@ -31,3 +31,7 @@ Route::get("/blog/{user}",function (User $user) {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/testgates', function (){
+    return view("gates.home");
+})->middleware('can:isUser');

@@ -6,6 +6,7 @@ use App\Http\Requests\PostValidationRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -128,7 +129,18 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        $post->delete();
-        return redirect(route("posts.index"));
+        if (Gate::allows('isAdmin')) {
+
+            dump('Admin allowed');
+            $post->delete();
+            return redirect(route("posts.index"));
+
+        } else {
+
+            dump('You are not Admin');
+
+
+        }
+
     }
 }
