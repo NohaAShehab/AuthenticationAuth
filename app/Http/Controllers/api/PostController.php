@@ -51,6 +51,7 @@ class PostController extends Controller
         //
 //        return $post;
 //        $post=Post::findorFail($post);
+//        dd($post);
         return new PostResource($post);
 
     }

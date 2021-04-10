@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +17,8 @@ class PostResource extends JsonResource
 //        return parent::toArray($request);
         return [
             "id"=>$this->id,
-            "posttitle"=>$this->title,
-            "postbody"=>$this->body,
-//            "author"=>[
-//                "name"=>$this->user->name,
-//                "email"=>$this->user->email,]
-                "author"=> new UserResource($this->user)
-
-            ];
+            "name"=>$this->name,
+            "email"=>$this->email,
+        ];
     }
 }
