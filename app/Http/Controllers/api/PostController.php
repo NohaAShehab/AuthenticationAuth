@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware("auth:sanctum")->except(["show","index"]);
+    }
+
     /**
      * Display a listing of the resource.
      *
